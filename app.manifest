@@ -1,0 +1,4 @@
+FileType=FlipperApp
+AppName=NRF Sniffer
+AppDescription=Sniffer using NRF24 module
+EntryPoint=nrf_sniffer_app
