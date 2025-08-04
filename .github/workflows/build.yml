@@ -11,30 +11,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout this repo
       uses: actions/checkout@v3
 
-    - name: Set up dependencies
+    - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y git cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential
+        sudo apt install -y git cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential python3 python3-pip
 
     - name: Clone Flipper Firmware
       run: |
         git clone --recursive https://github.com/flipperdevices/flipperzero-firmware.git
+
+    - name: Copy app to firmware folder
+      run: |
+        mkdir -p flipperzero-firmware/applications_user/nrf24_scanner
+        cp nrf24_scanner.c Makefile application.fam flipperzero-firmware/applications_user/nrf24_scanner/
+
+    - name: Build Flipper App
+      run: |
         cd flipperzero-firmware
-        echo "FIRMWARE_ROOT=$(pwd)" >> $GITHUB_ENV
+        ./fbt fap_user
 
-    - name: Copy app into firmware
-      run: |
-        mkdir -p $FIRMWARE_ROOT/applications_user/nrf24_scanner
-        cp nrf24_scanner.c Makefile application.fam $FIRMWARE_ROOT/applications_user/nrf24_scanner/
-
-    - name: Build app
-      run: |
-        cd $FIRMWARE_ROOT
-        ./fbt fap_nrf24_scanner
-
+    - name: Upload compiled .fap
+      uses: actions/upload-artifact@v4
+      with:
+        name: nrf24_scanner.fap
+        path: flipperzero-firmware/build/f7-firmware-D/.extapps/nrf24_scanner.fap
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
