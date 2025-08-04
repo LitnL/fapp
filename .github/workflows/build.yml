@@ -36,7 +36,7 @@ jobs:
         ./fbt fap_nrf24_scanner
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: nrf24_scanner.fap
-        path: flipperzero-firmware/build/f7-firmware-D/.extapps/nrf24_scanner.fap
+       name: nrf24_scanner.fap
+       path: flipperzero-firmware/build/f7-firmware-D/.extapps/nrf24_scanner.fap
