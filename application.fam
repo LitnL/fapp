@@ -1,8 +1,7 @@
-App(
-  appid="nrf24_scanner",
-  name="NRF24 Scanner",
-  entry="nrf24_scanner.c",
-  version="1.0.0",
-  description="Scans NRF24 channels and displays activity.",
-  author="LitnL"
-)
+FileType=FlipperApp
+AppVersion=1.0.0
+Name=NRF24 Scanner
+AppId=nrf24_scanner
+EntryPoint=nrf24_scanner_app
+Author=LitnL
+Description=Scans NRF24 channels and displays activity
