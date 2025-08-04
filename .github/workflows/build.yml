@@ -28,7 +28,7 @@ jobs:
     - name: Copy app into firmware
       run: |
         mkdir -p $FIRMWARE_ROOT/applications_user/nrf24_scanner
-        cp -r ./* $FIRMWARE_ROOT/applications_user/nrf24_scanner/
+        cp nrf24_scanner.c Makefile application.fam $FIRMWARE_ROOT/applications_user/nrf24_scanner/
 
     - name: Build app
       run: |
